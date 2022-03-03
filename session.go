@@ -68,7 +68,7 @@ func (s *Storage) GetSessions() ([]Session, error) {
 
 // 获取指定存储的特定session信息；
 func (s *Storage) GetSpecificSession(sessionId int) (token string, err error) {
-	url := BaseURL + "/storages/" + s.StorageDeviceId + "/sessions/" + fmt.Sprintf("%d", sessionId)
+	url := BaseURL + "/v1/objects/storages/" + s.StorageDeviceId + "/sessions/" + fmt.Sprintf("%d", sessionId)
 	res, err := GetRequest(url, s.Token)
 	if err != nil {
 		log.Fatalf("获取指定存储的特定session信息失败: %v\n", err)
@@ -92,7 +92,7 @@ func (s *Storage) DiscardSession(session Session, force bool) (err error) {
 		or a maintenance user for Virtual Storage Platform or Unified Storage VM can specify the value of sessionId that was obtained by the processing to get information about sessions.
 	*/
 
-	url := BaseURL + "/storages/" + s.StorageDeviceId + "/sessions/" + fmt.Sprintf("%d", session.SessionId)
+	url := BaseURL + "/v1/objects/storages/" + s.StorageDeviceId + "/sessions/" + fmt.Sprintf("%d", session.SessionId)
 	tmpMap := make(map[string]interface{})
 	tmpMap["force"] = force // 是否强制抛弃会话；
 
